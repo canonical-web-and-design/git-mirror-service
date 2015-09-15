@@ -48,14 +48,16 @@ def application(environ, start_response):
         status = '401 Unauthorized'
         output = "Invalid secret token"
     else:
-        copy_command = '{script_dir}/copy-repository.py {origin} {destination}'.format(
+        copy_command = (
+            '{script_dir}/copy-repository.py {origin} {destination}'
+        ).format(
             script_dir=script_dir,
             origin=origin,
             destination=destination
         )
 
         output = subprocess.check_output(
-            [copy_command],
+            copy_command.split(),
             stderr=subprocess.PIPE
         )
 
