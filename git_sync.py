@@ -4,7 +4,8 @@ import subprocess
 
 
 # Globals
-mirror_dir = "local-mirrors"
+script_dir = os.path.dirname(os.path.realpath(__file__))
+mirror_dir = os.path.join(script_dir, "local-mirrors")
 
 
 def safe_filename(prospective_filename):

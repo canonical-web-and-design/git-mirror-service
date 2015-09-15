@@ -1,11 +1,16 @@
 #!/usr/bin/env python
 
 # System
+import os
 import urlparse
 import subprocess
 
 # Modules
 from wsgiref.simple_server import make_server
+
+# Globals
+script_dir = os.path.dirname(os.path.realpath(__file__))
+secret_filename = os.path.join(script_dir, ".secret")
 
 
 def get_param(query_string, param_name):
@@ -33,7 +38,7 @@ def application(environ, start_response):
     origin = get_param(environ['QUERY_STRING'], 'origin')
     destination = get_param(environ['QUERY_STRING'], 'destination')
 
-    with open('.secret') as secret_file:
+    with open(secret_filename) as secret_file:
         real_secret = secret_file.read().strip()
 
     if not (secret and origin and destination):
