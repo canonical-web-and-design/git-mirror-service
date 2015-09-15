@@ -58,7 +58,7 @@ def application(environ, start_response):
 
         output = subprocess.check_output(
             copy_command.split(),
-            stderr=subprocess.PIPE
+            stderr=subprocess.STDOUT
         )
 
     start_response(status, headers)
