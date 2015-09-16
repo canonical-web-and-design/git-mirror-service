@@ -43,11 +43,9 @@ only accessible over HTTPS.
 Now you can query the service to mirror repositories. It accepts the following
 parameters:
 
-```
-origin: A git URL to mirror from (the service user must have pull access)
-destination: A git URL to mirror to (the service user must have push access)
-secret: If secret is enabled, a secret token for authentication.
-```
+- **origin**: A git URL to mirror from (the service user must have pull access)
+- **destination**: A git URL to mirror to (the service user must have push access)
+- **secret**: The secret token for authentication (if enabled)
 
 E.g.:
 
