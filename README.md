@@ -1,4 +1,4 @@
-Git mirroring service
+Git mirror service
 ===
 
 A simple WSGI server to create a mirror of a remote git repository
