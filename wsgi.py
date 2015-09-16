@@ -38,13 +38,14 @@ def application(environ, start_response):
     origin = get_param(environ['QUERY_STRING'], 'origin')
     destination = get_param(environ['QUERY_STRING'], 'destination')
 
-    with open(secret_filename) as secret_file:
-        real_secret = secret_file.read().strip()
+    if os.path.isfile(secret_filename):
+        with open(secret_filename) as secret_file:
+            real_secret = secret_file.read().strip()
 
     if not (secret and origin and destination):
         status = '400 Bad Request'
         output = "Missing one of `secret`, `origin` or `destination`"
-    elif secret != real_secret:
+    elif secret and secret != real_secret:
         status = '401 Unauthorized'
         output = "Invalid secret token"
     else:
