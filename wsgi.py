@@ -38,11 +38,13 @@ def application(environ, start_response):
     origin = get_param(environ['QUERY_STRING'], 'origin')
     destination = get_param(environ['QUERY_STRING'], 'destination')
 
+    real_secret = None
+
     if os.path.isfile(secret_filename):
         with open(secret_filename) as secret_file:
             real_secret = secret_file.read().strip()
 
-    if not (secret and origin and destination):
+    if (real_secret and not secret) or not origin or not destination:
         status = '400 Bad Request'
         output = "Missing one of `secret`, `origin` or `destination`"
     elif secret and secret != real_secret:
